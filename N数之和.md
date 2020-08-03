@@ -55,26 +55,24 @@ public:
         std::sort(nums.begin(), nums.end());
 
         for(int i = 0; i < length; i++) {
-	        	if(i > 0 && nums[i] == nums[i - 1]) continue;
-	        	int target = -nums[i];
-	        	int high = length - 1, low = i + 1;
-	        	while(low < high) {
-		        		int sum = nums[high] + nums[low];
-		        		if(sum == target) {
-		        			result.push_back({nums[i], nums[high], nums[low]});
-		        			while(low < high && nums[high] == nums[high - 1]) high--;
-		        			high--;
-		        			while(low < high && nums[low] == nums[low + 1]) low++;
-		        			low++;
-			        	}
-			        	else if(sum < target) {
-			        			while(low < high && nums[low] + nums[high] < target) low++;
-			          }
-			        	else {
-			        			while(low < high && nums[low] + nums[high] > target) high--;
-				        }
-			       }
-	      }
+            if(i > 0 && nums[i] == nums[i - 1]) continue;
+            int target = -nums[i];
+            int high = length - 1, low = i + 1;
+            while(low < high) {
+                int sum = nums[high] + nums[low];
+                if(sum == target) {
+                    result.push_back({nums[i], nums[high], nums[low]});
+                    while(low < high && nums[high] == nums[high - 1]) high--;
+                    high--;
+                    while(low < high && nums[low] == nums[low + 1]) low++;
+                    low++;
+                } else if(sum < target) {
+                    while(low < high && nums[low] + nums[high] < target) low++;
+                } else {
+                    while(low < high && nums[low] + nums[high] > target) high--;
+                }
+            }
+        }
         return result;
     }
 };
